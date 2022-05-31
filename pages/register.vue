@@ -7,7 +7,7 @@
     </Transition>
     <div class="h-full">
       <div
-        class="pop-up bg-white w-full p-5 fixed bottom-0 flex flex-col items-center "
+        class="pop-up bg-white w-full p-5 fixed bottom-0 flex flex-col items-center"
       >
         <div
           class="h-2 w-20 bg-white rounded mx-auto absolute -top-5 z-50"
@@ -16,19 +16,16 @@
         <div class="flex flex-col self-start">
           <h1 class="text-3xl font-semibold tracking-widest">Registrarse</h1>
           <span v-if="!isViewing" class="text-karla text-gray-400"
-          >Crea tu cuenta</span
+            >Crea tu cuenta</span
           >
         </div>
-        <div
-          v-if="!isViewing"
-          class="overflow-y-scroll mb-10"
-        >
+        <div v-if="!isViewing" class="overflow-y-scroll mb-10">
           <form class="relative my-8" @submit.prevent="onSubmit">
             <div class="my-3">
               <label
                 class="text-gray-400 text-karla font uppercase tracking-wide"
                 for="name"
-              >Nombres</label
+                >Nombres</label
               >
               <input
                 id="name"
@@ -45,7 +42,7 @@
               <label
                 class="text-gray-400 text-karla font uppercase tracking-wide"
                 for="lastname"
-              >Apellidos</label
+                >Apellidos</label
               >
               <input
                 id="lastname"
@@ -62,7 +59,7 @@
               <label
                 class="text-gray-400 text-karla font uppercase tracking-wide"
                 for="nit"
-              >Documento de identidad</label
+                >Documento de identidad</label
               >
               <input
                 id="nit"
@@ -78,14 +75,14 @@
               <label
                 class="text-gray-400 text-karla font uppercase tracking-wide"
                 for="phone"
-              >Celular</label
+                >Celular</label
               >
               <input
                 id="phone"
                 v-model="phone"
                 type="number"
                 class="bg-gray-100 w-full px-2 py-3 focus:outline-none text-karla"
-                placeholder="Documento de identidad"
+                placeholder="Numero Celular"
                 autofocus
                 required
               />
@@ -94,7 +91,7 @@
               <label
                 class="text-gray-400 text-karla font uppercase tracking-wide"
                 for="email"
-              >Correo electronico</label
+                >Correo electronico</label
               >
               <input
                 id="email"
@@ -111,7 +108,7 @@
               <label
                 class="text-gray-400 text-karla font uppercase tracking-wide"
                 for="email"
-              >Contraseña</label
+                >Contraseña</label
               >
               <div class="relative">
                 <input
@@ -175,7 +172,7 @@
               <label
                 class="text-gray-400 text-karla font uppercase tracking-wide"
                 for="email"
-              >Confirma la contraseña</label
+                >Confirma la contraseña</label
               >
               <div class="relative">
                 <input
@@ -238,7 +235,7 @@
             <a
               class="w-full flex justify-center font-semibold text-karla"
               href="/login"
-            >Ya tengo cuenta</a
+              >Ya tengo cuenta</a
             >
             <div class="w-full fixed left-0 flex justify-center mt-10">
               <button
@@ -247,7 +244,7 @@
               >
                 <span
                   class="text-center text-white text-lg text-karla font-semibold"
-                >Enviar</span
+                  >Enviar</span
                 >
               </button>
             </div>
@@ -328,8 +325,7 @@ export default {
   transition: opacity 0.3s;
 }
 
-.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */
-{
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
 }
 

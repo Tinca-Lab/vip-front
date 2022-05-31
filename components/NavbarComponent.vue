@@ -5,7 +5,9 @@
     <div class="flex items-center justify-between w-full px-5">
       <div class="flex">
         <span>👋🏻</span>
-        <p v-if="$auth.user" class="text-lg text-karla tracking-wide">Hola, {{ user }}</p>
+        <p v-if="$auth.user" class="text-lg text-karla tracking-wide">
+          Hola, {{ user }}
+        </p>
       </div>
       <div class="relative">
         <button type="button" @click="toggleView">
@@ -46,14 +48,6 @@ export default {
       {
         name: "Inicio",
         url: "/",
-      },
-      {
-        name: "Citas",
-        url: "/schedule",
-      },
-      {
-        name: "Reportes",
-        url: "/reports",
       },
       {
         name: "Configuración",
