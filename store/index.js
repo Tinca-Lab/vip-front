@@ -14,10 +14,10 @@ export const mutations = {
 
 export const actions = {
   setIsError(state, isError) {
-    state.commit('setIsError', isError);
+    state.commit("setIsError", isError);
   },
 
-  async getServices({commit}) {
+  async getServices({ commit }) {
     try {
       const response = await this.$axios.$get("/api/services/all");
       commit("setServices", response);

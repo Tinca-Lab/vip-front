@@ -1,5 +1,7 @@
 <template>
-  <div class="bg-indigo-50 shadow-sm rounded-lg my-5 p-5 text-karla cursor-pointer">
+  <div
+    class="bg-indigo-50 shadow-sm rounded-lg my-5 p-5 text-karla cursor-pointer"
+  >
     {{ service.name }}
   </div>
 </template>
@@ -10,16 +12,14 @@ export default {
   props: {
     isClick: {
       type: Boolean,
-      default: false
+      default: false,
     },
     service: {
       type: Object,
-      required: true
-    }
+      required: true,
+    },
   },
-}
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
