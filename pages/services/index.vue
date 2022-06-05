@@ -1,21 +1,22 @@
 <template>
   <div class="px-5 py-32">
     <div v-for="(service, i) in services" :key="i" @click="onClick(service)">
-      <ServicePopUpComponent :service="service"/>
+      <ServicePopUpComponent :service="service" />
     </div>
     <Transition name="fade">
       <div v-if="isClick">
         <div
           class="bg-white h-screen w-screen fixed top-0 left-0 py-32 px-10 flex items-center"
         >
-          <div
-            class="bg-white p-5 shadow rounded-lg block mx-auto w-full">
+          <div class="bg-white p-5 shadow rounded-lg block mx-auto w-full">
             <div class="flex justify-between">
               <p class="text-karla text-2xl tracking-widest font-bold">
                 {{ isService.name }}
               </p>
               <button type="button" @click="onClick(null)">
-                <span class="hover:text-gray-300 ease-in-out duration-75 transition-all">
+                <span
+                  class="hover:text-gray-300 ease-in-out duration-75 transition-all"
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="25"
@@ -43,6 +44,11 @@
 export default {
   name: "ServicesView",
   layout: "SlimLayout",
+  middleware({ store, redirect }) {
+    if (store.state.auth.user.role === 1) {
+      redirect("/admin/dashboard");
+    }
+  },
   data: () => ({
     isClick: false,
     isService: null,

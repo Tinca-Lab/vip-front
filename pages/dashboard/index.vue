@@ -37,5 +37,10 @@
 export default {
   name: "DashboardView",
   layout: "SlimLayout",
+  middleware({ store, redirect }) {
+    if (store.state.auth.user.role === 1) {
+      redirect("/admin/dashboard");
+    }
+  },
 };
 </script>

@@ -7,7 +7,9 @@
       <main class="flex-grow bg-white lg:pt-32 relative">
         <Nuxt class="relative" />
       </main>
-      <FooterComponent class="z-50" />
+      <footer>
+        <FooterComponent class="z-50" />
+      </footer>
     </div>
   </div>
 </template>
