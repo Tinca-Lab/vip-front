@@ -2,7 +2,7 @@ export const state = () => ({
   isError: false,
   services: [],
   schedules: [],
-  available: []
+  available: [],
 });
 
 export const mutations = {
@@ -17,7 +17,7 @@ export const mutations = {
   },
   setAvailable(state, payload) {
     state.available = payload;
-  }
+  },
 };
 
 export const actions = {
@@ -25,7 +25,7 @@ export const actions = {
     state.commit("setError", isError);
   },
 
-  async getServices({commit}) {
+  async getServices({ commit }) {
     try {
       const response = await this.$axios.$get("/api/services/customer");
       commit("setServices", response);
@@ -34,9 +34,9 @@ export const actions = {
     }
   },
 
-  async getSchedules({commit}) {
+  async getSchedules({ commit }) {
     try {
-      const {schedule} = await this.$axios.$get(
+      const { schedule } = await this.$axios.$get(
         `/api/schedule/customer/${this.$auth.user.person.nit}`
       );
       commit("setSchedules", schedule);
@@ -45,7 +45,7 @@ export const actions = {
     }
   },
 
-  async getAvailable({commit}, payload) {
+  async getAvailable({ commit }, payload) {
     try {
       const response = await this.$axios.$get(
         `/api/available/customer/${payload}`
@@ -54,5 +54,5 @@ export const actions = {
     } catch (error) {
       commit("setError", true);
     }
-  }
+  },
 };

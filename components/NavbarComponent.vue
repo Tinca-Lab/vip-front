@@ -36,6 +36,7 @@
         </ul>
       </div>
     </div>
+    <LoadingComponent v-if="isLoading" />
   </nav>
 </template>
 
@@ -44,6 +45,7 @@ export default {
   name: "NavbarComponent",
   data: () => ({
     isOpen: false,
+    isLoading: false,
     menu: [
       {
         name: "Inicio",
@@ -65,7 +67,10 @@ export default {
       this.isOpen = !this.isOpen;
     },
     async onSubmit() {
-      await this.$auth.logout();
+      this.isLoading = true;
+      await this.$auth.logout().then(() => {
+        this.isLoading = false;
+      });
     },
   },
 };

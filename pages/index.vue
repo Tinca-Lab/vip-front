@@ -20,8 +20,8 @@ export default {
   components: {
     ClipLoader,
   },
-  beforeCreate() {
-    this.$router.push("/dashboard");
+  middleware({ redirect }) {
+    return redirect("/login");
   },
 };
 </script>

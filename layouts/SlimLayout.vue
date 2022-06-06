@@ -8,7 +8,7 @@
         <Nuxt class="relative" />
       </main>
       <footer>
-        <FooterComponent class="z-50" />
+        <FooterComponent class="z-40" />
       </footer>
     </div>
   </div>

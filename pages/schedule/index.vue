@@ -10,13 +10,19 @@
       v-else
       class="text-gray-500 text-karla font-bold tracking-wider text-2xl"
     >
-        No tienes citas programadas
-      </span>
+      No tienes citas programadas
+    </span>
     <div v-if="schedules.length > 0">
-      <div v-for="(schedule, i) in schedules" :key="i" class="bg-indigo-100 p-5 rounded-lg flex flex-col">
+      <div
+        v-for="(schedule, i) in schedules"
+        :key="i"
+        class="bg-indigo-100 p-5 rounded-lg flex flex-col"
+      >
         <p class="text-karla">Cedula: {{ schedule.id_person }}</p>
-        <p v-if="service!==null" class="text-karla">Servicio: {{ schedule.id_service.name }}</p>
-        <p class="uppercase text-karla">{{ formatDate(schedule.date, true) }}</p>
+        <p class="text-karla">Servicio: {{ schedule.service.name }}</p>
+        <p class="uppercase text-karla">
+          {{ formatDate(schedule.date, true) }}
+        </p>
       </div>
     </div>
     <button
@@ -84,7 +90,10 @@
                   <h2 class="text-karla tracking-wide">
                     Fechas y Horarios Disponibles
                   </h2>
-                  <select v-model="date" class="bg-gray-100 text-karla w-full p-3">
+                  <select
+                    v-model="date"
+                    class="bg-gray-100 text-karla w-full p-3"
+                  >
                     <option selected disabled>Selecciona una fecha</option>
                     <option
                       v-for="(quote, i) in dates"
@@ -108,24 +117,25 @@
         </div>
       </div>
     </Transition>
+    <LoadingComponent v-if="isLoading" />
   </div>
 </template>
 
 <script>
 import moment from "moment";
-
 moment.locale("es");
 
 export default {
   name: "ScheduleView",
   layout: "SlimLayout",
-  middleware({store, redirect}) {
+  middleware({ store, redirect }) {
     if (store.state.auth.user.role === 1) {
       redirect("/admin/dashboard");
     }
   },
   data: () => ({
     isOpen: false,
+    isLoading: false,
     idService: "",
     date: null,
   }),
@@ -139,12 +149,14 @@ export default {
     dates() {
       return this.$store.state.available.map((item) => {
         return moment(item.date).format("MMMM D YYYY, h:mm:ss a");
-      })
-    }
+      });
+    },
   },
-  beforeCreate() {
+  beforeMount() {
+    this.isLoading = true;
     this.$store.dispatch("getSchedules");
     this.$store.dispatch("getServices");
+    this.isLoading = false;
   },
   methods: {
     toggleView() {
@@ -158,13 +170,16 @@ export default {
       }
     },
     async toggleService() {
-      await this.$store.dispatch("getAvailable", this.idService);
+      this.isLoading = true;
+      await this.$store.dispatch("getAvailable", this.idService).then(() => {
+        this.isLoading = false;
+      });
     },
     async onSubmit() {
       await this.$axios.post("api/schedule/customer", {
         date: this.formatDate(this.date, false),
         id_person: this.$auth.user.person.nit,
-        id_service: this.idService
+        id_service: this.idService,
       });
       this.toggleView();
     },
@@ -173,7 +188,6 @@ export default {
 </script>
 
 <style scoped>
-
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.1s;
