@@ -162,11 +162,6 @@ export default {
 </script>
 
 <style scoped>
-.bg-white {
-  background-color: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(10px);
-}
-
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.1s;

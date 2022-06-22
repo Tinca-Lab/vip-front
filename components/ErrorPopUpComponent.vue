@@ -38,6 +38,9 @@ export default {
   },
   computed: {
     hasErrorComputed() {
+      if (this.hasError.includes("Unauthorized")) {
+        return "Usuario o contraseña incorrectos";
+      }
       if (this.hasError.includes("The email has already been taken.")) {
         return "El correo electrónico ya está en uso.";
       }

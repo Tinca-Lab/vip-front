@@ -166,7 +166,7 @@ export default {
       if (bool) {
         return moment(date).format("MMMM D YYYY, h:mm:ss");
       } else {
-        return moment(date).format("YYYY-MM-DD hh:mm:ss");
+        return moment(date).format("YYYY-MM-DD HH:mm:ss");
       }
     },
     async toggleService() {

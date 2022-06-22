@@ -1,19 +1,12 @@
 <template>
   <div class="px-5 py-28 overflow-y-scroll h-screen">
-    <div class="grid grid-rows-4 grid-flow-col gap-4">
+    <div class="grid grid-rows-3 grid-flow-col gap-4">
       <nuxt-link
         to="/schedule"
         class="bg-indigo-50 rounded flex items-center justify-between py-2 px-5"
       >
         <p class="text-karla text-2xl tracking-wide">Citas Medicas</p>
         <img src="@/assets/icons/schedule.svg" alt="Citas medicas" />
-      </nuxt-link>
-      <nuxt-link
-        to="/reports"
-        class="bg-indigo-50 rounded flex items-center justify-between py-2 px-5"
-      >
-        <p class="text-karla text-2xl tracking-wide">Reportes Medicos</p>
-        <img src="@/assets/icons/reports.svg" alt="Reportes" />
       </nuxt-link>
       <nuxt-link
         to="/services"
