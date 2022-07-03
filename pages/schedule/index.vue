@@ -117,20 +117,24 @@
         </div>
       </div>
     </Transition>
-    <LoadingComponent v-if="isLoading" />
+    <LoadingComponent v-if="isLoading"/>
   </div>
 </template>
 
 <script>
 import moment from "moment";
+
 moment.locale("es");
 
 export default {
   name: "ScheduleView",
   layout: "SlimLayout",
-  middleware({ store, redirect }) {
+  middleware({store, redirect}) {
     if (store.state.auth.user.role === 1) {
       redirect("/admin/dashboard");
+    }
+    if (store.state.auth.user.verified === false) {
+      redirect("/not-verified");
     }
   },
   data: () => ({
@@ -178,8 +182,8 @@ export default {
     async onSubmit() {
       await this.$axios.post("api/schedule/customer", {
         date: this.formatDate(this.date, false),
-        id_person: this.$auth.user.person.nit,
-        id_service: this.idService,
+        person_id: this.$auth.user.person.id,
+        service_id: this.idService,
       });
       this.toggleView();
     },

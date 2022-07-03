@@ -21,7 +21,7 @@ export default {
     ClipLoader,
   },
   middleware({ redirect }) {
-    return redirect("/login");
+    return redirect("/dashboard");
   },
 };
 </script>

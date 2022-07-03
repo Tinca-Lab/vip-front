@@ -2,7 +2,7 @@
   <div class="px-5 py-32">
     <div v-if="services">
       <div v-for="(service, i) in services" :key="i">
-        <ServicePopUpComponent :service="service" />
+        <ServicePopUpComponent :service="service"/>
       </div>
     </div>
     <button
@@ -44,6 +44,7 @@
                 class="bg-gray-100 rounded-lg shadow-sm outline-none text-karla px-5 py-3"
                 type="text"
                 placeholder="Nombre del servicio"
+                required
               />
             </div>
             <div class="flex flex-col justify-center my-2">
@@ -54,6 +55,7 @@
                 class="bg-gray-100 rounded-lg shadow-sm outline-none text-karla px-5 py-3"
                 type="text"
                 placeholder="Descripcion del servicio"
+                required
               />
             </div>
             <div class="flex flex-col justify-center my-2">
@@ -66,6 +68,7 @@
                   class="bg-gray-100 rounded-lg shadow-sm outline-none text-karla px-5 py-3 inline w-full"
                   type="number"
                   placeholder="Precio del servicio"
+                  required
                 />
               </div>
             </div>
@@ -77,6 +80,7 @@
                   ref="available"
                   class="w-full shadow-sm bg-gray-100 rounded px-2 py-3 my-2"
                   type="datetime-local"
+                  required
                   @change="addAvailable"
                 />
               </div>
@@ -94,19 +98,18 @@
                 </button>
               </div>
             </div>
+            <div class="text-karla">
+              <label class="cursor-pointer" for="file">Agregar imagen:</label>
+              <input id="file" ref="file" type="file"/>
+            </div>
+            <button
+              class="bg-indigo-100 rounded-lg text-karla px-5 py-2 my-2 mx-auto block"
+              type="submit"
+            >
+              Enviar
+            </button>
           </form>
         </div>
-        <div>
-          <label class="cursor-pointer" for="file">Agregar imagen:</label>
-          <input id="file" ref="file" type="file" />
-        </div>
-        <button
-          class="bg-indigo-100 rounded-lg text-karla px-5 py-2 my-2"
-          type="button"
-          @click="onSubmit"
-        >
-          Enviar
-        </button>
       </div>
     </Transition>
   </div>
@@ -155,7 +158,9 @@ export default {
         description: this.description,
         price: this.price,
         available: this.available,
-      });
+      }).then(() => {
+        this.toggleView();
+      })
     },
   },
 };

@@ -3,12 +3,12 @@ export default {
   head: {
     title: "vip",
     meta: [
-      { charset: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { hid: "description", name: "description", content: "" },
-      { name: "format-detection", content: "telephone=no" },
+      {charset: "utf-8"},
+      {name: "viewport", content: "width=device-width, initial-scale=1"},
+      {hid: "description", name: "description", content: ""},
+      {name: "format-detection", content: "telephone=no"},
     ],
-    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
+    link: [{rel: "icon", type: "image/x-icon", href: "/favicon.ico"}],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -70,9 +70,9 @@ export default {
           autoFetch: true,
         },
         endpoints: {
-          login: { url: "/api/auth/login", method: "post" },
-          logout: { url: "/api/auth/logout", method: "post" },
-          user: { url: "/api/auth/user", method: "post" },
+          login: {url: "/api/auth/login", method: "post"},
+          logout: {url: "/api/auth/logout", method: "post"},
+          user: {url: "/api/auth/user", method: "post"},
         },
       },
     },
@@ -87,4 +87,9 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
+
+  server: {
+    port: 3000, // default: 3000
+    host: '0.0.0.0', // default: localhost
+  },
 };

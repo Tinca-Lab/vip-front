@@ -35,6 +35,9 @@ export default {
     if (store.state.auth.user.role === 1) {
       redirect("/admin/dashboard");
     }
+    if (store.state.auth.user.verified === false) {
+      redirect("/not-verified");
+    }
   },
 };
 </script>

@@ -175,8 +175,9 @@ export default {
             password: this.password,
           },
         });
-        await this.$router.push("/dashboard");
-        this.isLoading = false;
+        await this.$router.push("/dashboard").then(() =>{
+          this.isLoading = false;
+        });
       } catch (error) {
         this.isLoading = false;
         this.hasError = error.response.data.error;

@@ -1,7 +1,8 @@
+d
 <template>
   <div class="px-5 py-32">
     <div v-for="(service, i) in services" :key="i" @click="onClick(service)">
-      <ServicePopUpComponent :service="service" />
+      <ServicePopUpComponent :service="service"/>
     </div>
     <Transition name="fade">
       <div v-if="isClick">
@@ -44,9 +45,12 @@
 export default {
   name: "ServicesView",
   layout: "SlimLayout",
-  middleware({ store, redirect }) {
+  middleware({store, redirect}) {
     if (store.state.auth.user.role === 1) {
       redirect("/admin/dashboard");
+    }
+    if (store.state.auth.user.verified === false) {
+      redirect("/not-verified");
     }
   },
   data: () => ({

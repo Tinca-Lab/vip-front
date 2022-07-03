@@ -32,7 +32,7 @@ export default {
   },
   computed: {
     dates() {
-      return this.service.date.map((item) => {
+      return this.service.available.map((item) => {
         return moment(item.date).format("MMMM D YYYY, h:mm:ss a");
       });
     },

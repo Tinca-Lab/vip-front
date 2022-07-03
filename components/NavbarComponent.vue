@@ -69,7 +69,7 @@ export default {
     async onSubmit() {
       this.isLoading = true;
       await this.$auth.logout().then(() => {
-        this.isLoading = false;
+        location.reload();
       });
     },
   },
