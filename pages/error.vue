@@ -13,11 +13,11 @@
           Lo siento, estas accediendo a una pagina sin el permiso correcto!
         </p>
         <p class="mt-4 mb-8 dark:text-gray-400">Intenta nuevamente</p>
-        <a
+        <nuxt-link
           rel="noopener noreferrer"
-          href="/"
+          to="/"
           class="px-8 py-3 font-semibold rounded dark:bg-violet-400 dark:text-gray-900"
-          >Regresa al inicio!</a
+          >Regresa al inicio!</nuxt-link
         >
       </div>
     </div>

@@ -28,6 +28,13 @@
           Enviar
         </button>
       </div>
+      <Transition name="bounce">
+        <ErrorPopUpComponent
+          v-if="hasError !== null"
+          :has-error="hasError"
+          @close="onClose"
+        />
+      </Transition>
     </div>
   </div>
 </template>
@@ -47,7 +54,8 @@ export default {
   },
   data: () => ({
     code: '',
-    isLoading: false
+    isLoading: false,
+    hasError: null
   }),
   async beforeCreate() {
     await this.$axios.post('api/auth/send-code', {
@@ -60,26 +68,65 @@ export default {
     },
     async onSubmit() {
       this.isLoading = true;
-      await this.$axios.post('api/auth/verify-code', {
-        email: this.$auth.user.email,
-        code: this.code
-      });
-      await this.$axios.post('api/auth/user').then(response => {
-        this.$auth.setUser(response.data.user);
-      });
-      await this.$router.push('/dashboard').then(() => {
+      try {
+        await this.$axios.post('api/auth/verify-code', {
+          email: this.$auth.user.email,
+          code: this.code
+        }).then(async () => {
+          await this.$axios.post('api/auth/user').then(response => {
+            this.$auth.setUser(response.data.user);
+          });
+          await this.$router.push('/dashboard');
+        });
+      } catch (error) {
+        this.isError = error;
         this.isLoading = false;
-      });
+      }
     },
     async onResend() {
       await this.$axios.post('api/auth/send-code', {
         email: this.$auth.user.email
       });
-    }
+    },
+    onClose() {
+      this.hasError = null;
+    },
   }
 }
 </script>
 
 <style scoped>
+.pop-up {
+  height: 70%;
+}
 
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s;
+}
+
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */
+{
+  opacity: 0;
+}
+
+.bounce-enter-active {
+  animation: bounce-in 0.4s;
+}
+
+.bounce-leave-active {
+  animation: bounce-in 0.4s reverse;
+}
+
+@keyframes bounce-in {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.25);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
 </style>

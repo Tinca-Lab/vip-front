@@ -1,6 +1,6 @@
 <template>
   <div>
-    <LoadingComponent v-if="isLoading" />
+    <LoadingComponent v-if="isLoading"/>
     <div v-else class="background h-screen relative">
       <Transition name="fade">
         <h1 v-if="isViewing" class="text-white text-center text-3xl pt-12">
@@ -20,7 +20,7 @@
               Iniciar sesión
             </h1>
             <span v-if="!isViewing" class="text-karla text-gray-400"
-              >Ingresa en tu cuenta</span
+            >Ingresa en tu cuenta</span
             >
           </div>
           <div v-if="!isViewing">
@@ -29,7 +29,7 @@
                 <label
                   class="text-gray-400 text-karla font uppercase tracking-wide"
                   for="email"
-                  >Correo electronico</label
+                >Correo electronico</label
                 >
                 <input
                   id="email"
@@ -46,7 +46,7 @@
                 <label
                   class="text-gray-400 text-karla font uppercase tracking-wide"
                   for="email"
-                  >Contraseña</label
+                >Contraseña</label
                 >
                 <div class="relative">
                   <input
@@ -106,16 +106,18 @@
                   </span>
                 </div>
               </div>
-              <a
+              <nuxt-link
                 class="text-karla font-semibold tracking-wide mt-5"
-                href="/forgot-password"
-                >Olvidaste tu contraseña?</a
+                to="/forgot-password"
+              >Olvidaste tu contraseña?
+              </nuxt-link
               >
               <div class="w-full fixed left-0 flex justify-center">
-                <a
-                  href="/register"
+                <nuxt-link
+                  to="/register"
                   class="text-center text-karla font-semibold mt-12"
-                  >No tengo cuenta</a
+                >No tengo cuenta
+                </nuxt-link
                 >
                 <button
                   type="submit"
@@ -123,7 +125,7 @@
                 >
                   <span
                     class="text-center text-white text-lg text-karla font-semibold"
-                    >Enviar</span
+                  >Enviar</span
                   >
                 </button>
               </div>
@@ -174,13 +176,12 @@ export default {
             email: this.email,
             password: this.password,
           },
-        });
-        await this.$router.push("/dashboard").then(() =>{
-          this.isLoading = false;
-        });
+        }).then(async () => {
+          await this.$router.push("/");
+        })
       } catch (error) {
+        this.hasError = error.response;
         this.isLoading = false;
-        this.hasError = error.response.data.error;
       }
     },
   },
@@ -197,7 +198,8 @@ export default {
   transition: opacity 0.3s;
 }
 
-.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */
+{
   opacity: 0;
 }
 
