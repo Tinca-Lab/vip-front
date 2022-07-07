@@ -7,16 +7,3 @@
   margin: 0;
   padding: 0;
 }
-
-html {
-  font-family: "Playfair Display", serif;
-}
-
-.text-karla {
-  font-family: "Karla", sans-serif !important;
-}
-
-.background {
-  background: url("@/assets/background.png") no-repeat center center;
-  background-size: cover;
-}
