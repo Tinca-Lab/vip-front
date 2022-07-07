@@ -2,7 +2,7 @@
   <div class="px-5 py-32">
     <div v-if="services">
       <div v-for="(service, i) in services" :key="i">
-        <ServicePopUpComponent :service="service"/>
+        <ServicePopUpComponent :service="service" />
       </div>
     </div>
     <button
@@ -89,7 +89,11 @@
                   Agregar otra fecha
                 </button>
                 <button
-                  :class="howAvailable > 1 ? 'text-red-500 font-bold' : 'text-gray-500'"
+                  :class="
+                    howAvailable > 1
+                      ? 'text-red-500 font-bold'
+                      : 'text-gray-500'
+                  "
                   type="button"
                   :disabled="howAvailable <= 1"
                   @click="removeAvailable"
@@ -99,16 +103,24 @@
               </div>
             </div>
             <div class="text-karla">
-              <label class="block mb-2 text-md font-medium text-gray-900 dark:text-gray-300 text-karla" for="files">Agregar
-                imagen</label>
+              <label
+                class="block mb-2 text-md font-medium text-gray-900 dark:text-gray-300 text-karla"
+                for="files"
+                >Agregar imagen</label
+              >
               <input
-                id="files" ref="file"
+                id="files"
+                ref="file"
                 class="block text-karla w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-                aria-describedby="file_input_help" type="file">
-              <p id="file_input_help" class="mt-1 text-sm text-gray-500 dark:text-gray-300 text-karla">SVG, PNG, JPG or
-                GIF
-                (MAX.
-                800x400px).</p>
+                aria-describedby="file_input_help"
+                type="file"
+              />
+              <p
+                id="file_input_help"
+                class="mt-1 text-sm text-gray-500 dark:text-gray-300 text-karla"
+              >
+                SVG, PNG, JPG or GIF (MAX. 800x400px).
+              </p>
             </div>
             <button
               class="bg-indigo-100 rounded-lg text-karla px-5 py-2 my-2 mx-auto block"
@@ -162,26 +174,30 @@ export default {
       this.available.pop();
     },
     async onSubmit() {
-      await this.$axios.post("/api/services/admin", {
-        name: this.name,
-        description: this.description,
-        price: this.price,
-        available: this.available,
-      }).then(async (response) => {
-        const {data} = response;
-        const formData = new FormData();
-        this.image = this.$refs.file.files.item(0);
-        formData.append("image", this.image);
-        formData.append("service_id", data.service.id);
-        await this.$axios.post("api/services/admin/save-image", formData, {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }).then(() => {
-          this.toggleView();
-          location.reload();
+      await this.$axios
+        .post("/api/services/admin", {
+          name: this.name,
+          description: this.description,
+          price: this.price,
+          available: this.available,
+        })
+        .then(async (response) => {
+          const { data } = response;
+          const formData = new FormData();
+          this.image = this.$refs.file.files.item(0);
+          formData.append("image", this.image);
+          formData.append("service_id", data.service.id);
+          await this.$axios
+            .post("api/services/admin/save-image", formData, {
+              headers: {
+                "Content-Type": "multipart/form-data",
+              },
+            })
+            .then(() => {
+              this.toggleView();
+              location.reload();
+            });
         });
-      })
     },
   },
 };

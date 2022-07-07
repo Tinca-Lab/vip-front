@@ -6,21 +6,21 @@
         class="bg-indigo-50 rounded flex items-center justify-between py-2 px-5"
       >
         <p class="text-karla text-2xl tracking-wide">Citas Medicas</p>
-        <img src="@/assets/icons/schedule.svg" alt="Citas medicas"/>
+        <img src="@/assets/icons/schedule.svg" alt="Citas medicas" />
       </nuxt-link>
       <nuxt-link
         to="/services"
         class="bg-indigo-50 rounded flex items-center justify-between py-2 px-5"
       >
         <p class="text-karla text-2xl tracking-wide">Servicios</p>
-        <img src="@/assets/icons/services.svg" alt="Servicios"/>
+        <img src="@/assets/icons/services.svg" alt="Servicios" />
       </nuxt-link>
       <nuxt-link
         to="/support"
         class="bg-indigo-50 rounded flex items-center justify-between py-2 px-5"
       >
         <p class="text-karla text-2xl tracking-wide">Soporte</p>
-        <img src="@/assets/icons/support.svg" alt="Soporte"/>
+        <img src="@/assets/icons/support.svg" alt="Soporte" />
       </nuxt-link>
     </div>
   </div>
@@ -30,7 +30,7 @@
 export default {
   name: "DashboardView",
   layout: "SlimLayout",
-  middleware({store, redirect}) {
+  middleware({ store, redirect }) {
     if (store.state.auth.user.role === 1) {
       redirect("/admin/dashboard");
     }

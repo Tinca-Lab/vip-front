@@ -117,7 +117,7 @@
         </div>
       </div>
     </Transition>
-    <LoadingComponent v-if="isLoading"/>
+    <LoadingComponent v-if="isLoading" />
   </div>
 </template>
 
@@ -129,7 +129,7 @@ moment.locale("es");
 export default {
   name: "ScheduleView",
   layout: "SlimLayout",
-  middleware({store, redirect}) {
+  middleware({ store, redirect }) {
     if (store.state.auth.user.role === 1) {
       redirect("/admin/dashboard");
     }

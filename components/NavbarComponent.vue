@@ -36,7 +36,7 @@
         </ul>
       </div>
     </div>
-    <LoadingComponent v-if="isLoading" />
+    <LoadingComponent v-if="isLoading"/>
   </nav>
 </template>
 
@@ -68,8 +68,9 @@ export default {
     },
     async onSubmit() {
       this.isLoading = true;
-      await this.$auth.logout().then(() => {
-        location.reload();
+      await this.$auth.logout();
+      this.$router.push("/login").then(r => {
+        this.isLoading = false;
       });
     },
   },

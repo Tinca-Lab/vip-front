@@ -1,15 +1,11 @@
 <template>
-  <div>
-    Verify
-  </div>
+  <div>Verify</div>
 </template>
 
 <script>
 export default {
   name: "VerifyView",
-}
+};
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>

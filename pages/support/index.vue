@@ -31,7 +31,7 @@
 export default {
   name: "SupportView",
   layout: "SlimLayout",
-  middleware({store, redirect}) {
+  middleware({ store, redirect }) {
     if (store.state.auth.user.role === 1) {
       redirect("/admin/dashboard");
     }
