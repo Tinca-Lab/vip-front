@@ -47,7 +47,7 @@ export default {
       if (this.hasError.includes("The password confirmation does not match.")) {
         return "La contraseña no coinciden.";
       } else {
-        return this.hasError;
+        return "Error desconocido";
       }
     },
   },
