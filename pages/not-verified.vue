@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex items-center justify-center min-h-screen p-5 bg-blue-100 min-w-screen text-karla"
+    class="flex items-center justify-center min-h-screen p-5 bg-blue-100 min-w-screen"
   >
     <div
       class="max-w-xl p-8 text-center text-gray-800 bg-white shadow-xl lg:max-w-3xl rounded-3xl lg:p-12"

@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col items-center justify-center h-screen">
-    <h1 class="text-karla text-3xl font-bold tracking-widest">
+    <h1 class="text-3xl font-bold tracking-widest">
       Sitio en construccion
     </h1>
     <div class="my-5">

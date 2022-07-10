@@ -1,6 +1,6 @@
 d
 <template>
-  <div class="px-5 py-32">
+  <div class="px-5 py-32 h-full background">
     <div v-for="(service, i) in services" :key="i" @click="onClick(service)">
       <ServicePopUpComponent :service="service" />
     </div>
@@ -11,7 +11,7 @@ d
         >
           <div class="bg-white p-5 shadow rounded-lg block mx-auto w-full">
             <div class="flex justify-between">
-              <p class="text-karla text-2xl tracking-widest font-bold">
+              <p class="text-2xl tracking-widest font-bold">
                 {{ isService.name }}
               </p>
               <button type="button" @click="onClick(null)">
@@ -33,7 +33,7 @@ d
                 </span>
               </button>
             </div>
-            <span class="text-karla text-lg">{{ isService.description }}</span>
+            <span class="text-lg">{{ isService.description }}</span>
           </div>
         </div>
       </div>

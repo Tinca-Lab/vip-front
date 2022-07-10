@@ -1,16 +1,17 @@
 <template>
-  <div class="px-5 py-32">
+  <div class="px-5 py-32 background h-full flex flex-col justify-center items-center">
     <h1
       v-if="schedules.length > 0"
-      class="text-karla font-bold tracking-wider text-2xl"
+      class="font-bold tracking-wider text-2xl"
     >
       Mis Citas
     </h1>
     <span
       v-else
-      class="text-gray-500 text-karla font-bold tracking-wider text-2xl"
+      class="bg-white bg-opacity-60 backdrop-blur backdrop-filter rounded-xl flex items-center justify-between py-5 px-5"
     >
-      No tienes citas programadas
+      <span class="text-lg text-blue-500 font-semibold tracking-wide px-5 text-center">Aún no tienes <br> citas programadas</span>
+      <img src="@/assets/shortcuts/schedule.svg" alt="Citas medicas"/>
     </span>
     <div v-if="schedules.length > 0">
       <div
@@ -18,19 +19,19 @@
         :key="i"
         class="bg-indigo-100 p-5 rounded-lg flex flex-col"
       >
-        <p class="text-karla">Cedula: {{ schedule.id_person }}</p>
-        <p class="text-karla">Servicio: {{ schedule.service.name }}</p>
-        <p class="uppercase text-karla">
+        <p>Cedula: {{ schedule.id_person }}</p>
+        <p>Servicio: {{ schedule.service.name }}</p>
+        <p class="uppercase">
           {{ formatDate(schedule.date, true) }}
         </p>
       </div>
     </div>
     <button
-      class="text-karla uppercase tracking-wider shadow-sm text-white font-bold bg-gray-400 rounded-lg py-2 px-5 block my-3 mx-auto"
+      class="tracking-wide text-white hover:bg-blue-500 ease-in-out duration-200 bg-blue-400 rounded-xl py-3.5 px-5 block my-7 mx-auto"
       type="button"
       @click="toggleView"
     >
-      Agendar Cita
+      Agende una cita
     </button>
     <Transition name="fade">
       <div
@@ -42,7 +43,7 @@
             class="bg-white p-5 shadow rounded-lg block mx-auto w-full flex flex-col justify-center items-center"
           >
             <div class="flex w-full justify-between">
-              <p class="text-karla text-lg tracking-widest font-bold">
+              <p class="text-lg tracking-widest font-bold">
                 Angendamiento de Citas
               </p>
               <button type="button" @click="toggleView">
@@ -66,13 +67,13 @@
             </div>
             <form class="w-full my-3" @submit.prevent="onSubmit">
               <div class="flex flex-col my-3">
-                <label class="text-karla uppercase" for="service">
+                <label class="uppercase" for="service">
                   Selecciona un servicio
                 </label>
                 <select
                   id="service"
                   v-model="idService"
-                  class="text-karla text-lg tracking-widest font-bold w-full p-3"
+                  class="text-lg tracking-widest font-bold w-full p-3"
                   name="service"
                   required
                   @change="toggleService"
@@ -87,19 +88,19 @@
                   </option>
                 </select>
                 <div class="my-3">
-                  <h2 class="text-karla tracking-wide">
+                  <h2 class="tracking-wide">
                     Fechas y Horarios Disponibles
                   </h2>
                   <select
                     v-model="date"
-                    class="bg-gray-100 text-karla w-full p-3"
+                    class="bg-gray-100 w-full p-3"
                   >
                     <option selected disabled>Selecciona una fecha</option>
                     <option
                       v-for="(quote, i) in dates"
                       :key="i"
                       :value="quote"
-                      class="uppercase text-karla"
+                      class="uppercase"
                     >
                       {{ quote }}
                     </option>
@@ -107,7 +108,7 @@
                 </div>
               </div>
               <button
-                class="bg-indigo-50 px-5 py-3 text-karla rounded-lg"
+                class="bg-indigo-50 px-5 py-3 rounded-lg"
                 type="submit"
               >
                 Agendar
@@ -117,7 +118,7 @@
         </div>
       </div>
     </Transition>
-    <LoadingComponent v-if="isLoading" />
+    <LoadingComponent v-if="isLoading"/>
   </div>
 </template>
 
@@ -129,7 +130,7 @@ moment.locale("es");
 export default {
   name: "ScheduleView",
   layout: "SlimLayout",
-  middleware({ store, redirect }) {
+  middleware({store, redirect}) {
     if (store.state.auth.user.role === 1) {
       redirect("/admin/dashboard");
     }

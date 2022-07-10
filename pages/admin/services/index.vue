@@ -1,12 +1,19 @@
 <template>
-  <div class="px-5 py-32">
-    <div v-if="services">
+  <div class="px-5 py-32 h-full background">
+    <div v-if="services.length > 0">
       <div v-for="(service, i) in services" :key="i">
-        <ServicePopUpComponent :service="service" />
+        <ServicePopUpComponent :service="service"/>
       </div>
     </div>
+    <span
+      v-else
+      class="bg-white bg-opacity-60 backdrop-blur backdrop-filter rounded-xl flex items-center justify-between py-5 px-5"
+    >
+      <span class="text-lg text-blue-500 font-semibold tracking-wide px-5 text-center">Aun no has <br> creado servicios</span>
+      <img src="@/assets/shortcuts/service.svg" alt="Servicios"/>
+    </span>
     <button
-      class="text-karla block mx-auto bg-gray-400 rounded-lg px-5 py-3 text-white font-bold"
+      class="block mx-auto bg-gray-400 rounded-lg px-5 py-3 text-white font-bold my-7"
       type="button"
       @click="toggleView"
     >
@@ -18,7 +25,7 @@
         class="bg-white h-screen w-screen absolute top-0 left-0 px-5 py-10 z-50 flex flex-col items-center"
       >
         <div class="flex justify-between w-full">
-          <h1 class="text-karla text-lg">Agregar servicio</h1>
+          <h1 class="text-lg">Agregar servicio</h1>
           <button type="button" @click="toggleView">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -37,42 +44,42 @@
         <div class="my-5 w-full">
           <form @submit.prevent="onSubmit">
             <div class="flex flex-col justify-center mt-2">
-              <label class="text-karla" for="name">Nombre:</label>
+              <label for="name">Nombre:</label>
               <input
                 id="name"
                 v-model="name"
-                class="bg-gray-100 rounded-lg shadow-sm outline-none text-karla px-5 py-3"
+                class="bg-gray-100 rounded-lg shadow-sm outline-none px-5 py-3"
                 type="text"
                 placeholder="Nombre del servicio"
                 required
               />
             </div>
             <div class="flex flex-col justify-center my-2">
-              <label class="text-karla" for="description">Descripcion:</label>
+              <label for="description">Descripcion:</label>
               <input
                 id="description"
                 v-model="description"
-                class="bg-gray-100 rounded-lg shadow-sm outline-none text-karla px-5 py-3"
+                class="bg-gray-100 rounded-lg shadow-sm outline-none px-5 py-3"
                 type="text"
                 placeholder="Descripcion del servicio"
                 required
               />
             </div>
             <div class="flex flex-col justify-center my-2">
-              <label class="text-karla" for="price">Precio:</label>
+              <label for="price">Precio:</label>
               <div class="flex items-center">
-                <span class="mr-3 text-karla">$</span>
+                <span class="mr-3">$</span>
                 <input
                   id="price"
                   v-model="price"
-                  class="bg-gray-100 rounded-lg shadow-sm outline-none text-karla px-5 py-3 inline w-full"
+                  class="bg-gray-100 rounded-lg shadow-sm outline-none px-5 py-3 inline w-full"
                   type="number"
                   placeholder="Precio del servicio"
                   required
                 />
               </div>
             </div>
-            <div class="text-karla flex flex-col justify-center">
+            <div class="flex flex-col justify-center">
               <label for="available">Disponible:</label>
               <div v-for="i in howAvailable" :key="i">
                 <input
@@ -102,28 +109,28 @@
                 </button>
               </div>
             </div>
-            <div class="text-karla">
+            <div>
               <label
-                class="block mb-2 text-md font-medium text-gray-900 dark:text-gray-300 text-karla"
+                class="block mb-2 text-md font-medium text-gray-900 dark:text-gray-300"
                 for="files"
-                >Agregar imagen</label
+              >Agregar imagen</label
               >
               <input
                 id="files"
                 ref="file"
-                class="block text-karla w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                class="block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                 aria-describedby="file_input_help"
                 type="file"
               />
               <p
                 id="file_input_help"
-                class="mt-1 text-sm text-gray-500 dark:text-gray-300 text-karla"
+                class="mt-1 text-sm text-gray-500 dark:text-gray-300"
               >
                 SVG, PNG, JPG or GIF (MAX. 800x400px).
               </p>
             </div>
             <button
-              class="bg-indigo-100 rounded-lg text-karla px-5 py-2 my-2 mx-auto block"
+              class="bg-indigo-100 rounded-lg px-5 py-2 my-2 mx-auto block"
               type="submit"
             >
               Enviar
@@ -182,7 +189,7 @@ export default {
           available: this.available,
         })
         .then(async (response) => {
-          const { data } = response;
+          const {data} = response;
           const formData = new FormData();
           this.image = this.$refs.file.files.item(0);
           formData.append("image", this.image);

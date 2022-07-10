@@ -1,5 +1,5 @@
 <template>
-  <div class="py-28 px-5 text-karla">
+  <div class="py-28 px-5">
     <h1 class="text-2xl text-center mb-5">¡Estamos a un solo boton!</h1>
     <div class="w-full md:w-96 md:max-w-full mx-auto">
       <div class="p-6 border border-gray-300 rounded-lg">

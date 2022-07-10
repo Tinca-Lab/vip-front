@@ -6,4 +6,13 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: 'Montserrat', sans-serif, 'Open Sans';
+}
+
+
+@media (max-width: 768px) {
+  .background {
+    background: url("@/assets/background.png") no-repeat center center;
+    background-size: cover;
+  }
 }

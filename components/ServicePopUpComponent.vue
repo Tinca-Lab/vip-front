@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-indigo-50 shadow-sm rounded-lg my-5 p-5 text-karla text-2xl cursor-pointer"
+    class="bg-indigo-50 shadow-sm rounded-lg my-5 p-5 text-2xl cursor-pointer"
   >
     {{ service.name }}
     <span

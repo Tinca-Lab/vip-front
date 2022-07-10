@@ -2,7 +2,7 @@
   <div>
     <LoadingComponent v-if="isLoading" />
     <div
-      class="flex items-center justify-center min-h-screen p-5 bg-indigo-100 min-w-screen text-karla"
+      class="flex items-center justify-center min-h-screen p-5 bg-indigo-100 min-w-screen"
     >
       <div
         class="bg-white rounded-lg w-full h-full p-5 flex flex-col items-center justify-center"

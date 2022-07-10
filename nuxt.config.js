@@ -37,8 +37,7 @@ export default {
 
   googleFonts: {
     families: {
-      "Playfair+Display": true,
-      Karla: true,
+      Montserrat: true,
       Roboto: true,
     },
   },

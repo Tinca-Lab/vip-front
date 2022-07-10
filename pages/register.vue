@@ -7,7 +7,7 @@
     >
       <div class="min-w-max">
         <div
-          class="bg-white w-max flex flex-col items-center justify-center p-5 rounded-xl"
+          class="bg-white w-full flex flex-col items-center justify-center px-10 py-5 rounded-xl"
         >
           <aside class="w-full block">
             <img

@@ -2,7 +2,7 @@
   <div class="modal h-screen w-screen fixed top-0 z-50 flex items-center px-14">
     <div class="bg-white w-auto h-auto rounded-lg shadow-lg p-5">
       <div class="flex justify-between">
-        <h3 class="text-karla tracking-widest font-semibold">Error</h3>
+        <h3 class="tracking-widest font-semibold">Error</h3>
         <button type="button" @click="onClose">
           <svg
             xmlns="http://www.w3.org/2000/svg"

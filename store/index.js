@@ -3,6 +3,7 @@ export const state = () => ({
   services: [],
   schedules: [],
   available: [],
+  beneficiaries: [],
 });
 
 export const mutations = {
@@ -18,6 +19,9 @@ export const mutations = {
   setAvailable(state, payload) {
     state.available = payload;
   },
+  setBeneficiaries(state, payload) {
+    state.beneficiaries = payload;
+  }
 };
 
 export const actions = {
@@ -55,4 +59,15 @@ export const actions = {
       commit("setError", true);
     }
   },
+  async getBeneficiaries({ commit }, payload) {
+    try {
+      const response = await this.$axios.$get(
+        `/api/beneficiary/customer/person/${payload}`
+      );
+      console.log(response);
+      commit("setBeneficiaries", response);
+    } catch (error) {
+      commit("setError", true);
+    }
+  }
 };
