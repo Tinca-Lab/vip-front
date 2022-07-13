@@ -3,7 +3,7 @@
     <LoadingComponent v-if="isLoading"/>
     <section
       v-else
-      class="h-screen w-screen flex flex-col justify-center items-center background px-5"
+      class="h-full w-full md:h-screen md:w-screen flex flex-col justify-center items-center background p-5"
     >
       <div class="min-w-max">
         <div

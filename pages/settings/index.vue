@@ -67,18 +67,36 @@
       <h1 class="font-bold">
         {{ user.person.lastname }}
       </h1>
-      <p class="text-center text-gray-600">
-        {{ user.email }}
-      </p>
-      <p>
-        {{ user.person.phone }}
-      </p>
     </section>
     <section>
+      <div
+        class="bg-blue-200 flex justify-center w-full rounded-2xl p-1 my-5"
+      >
+        <button
+          type="button" :class="[active === 'profile' ? 'bg-blue-400 rounded-xl' : '']"
+          class="w-1/2 text-center px-5 py-3 text-white font-bold"
+          @click="toggle = 'profile'"
+        >Mis datos
+        </button
+        >
+        <button
+          type="button"
+          class="w-1/2 text-center px-5 py-3 text-white font-bold"
+          :class="[active === 'beneficiaries' ? 'bg-blue-400 rounded-xl' : '']"
+          @click="toggle = 'beneficiaries'"
+        >Beneficiarios
+        </button
+        >
+      </div>
+    </section>
+    <section v-if="toggle === 'beneficiaries'">
       <h2 class="text-2xl font-semibold text-blue-500">Mis beneficiarios</h2>
       <p v-for="beneficiary in beneficiaries" :key="beneficiary.id">
         {{ beneficiary.name }} {{ beneficiary.lastname }}
       </p>
+    </section>
+    <section v-else>
+      <p>Mis datos</p>
     </section>
   </div>
 </template>
@@ -98,6 +116,7 @@ export default {
   data: () => ({
     image: null,
     isChange: false,
+    toggle: 'profile',
   }),
   computed: {
     user() {
@@ -105,6 +124,16 @@ export default {
     },
     beneficiaries() {
       return this.$store.state.beneficiaries;
+    },
+    active() {
+      switch (this.toggle) {
+        case 'profile':
+          return "profile";
+        case 'beneficiaries':
+          return "beneficiaries";
+        default:
+          return "profile";
+      }
     },
   },
   beforeCreate() {
@@ -128,7 +157,7 @@ export default {
     },
     toggleChange() {
       this.isChange = !this.isChange;
-    }
+    },
   },
 };
 </script>
