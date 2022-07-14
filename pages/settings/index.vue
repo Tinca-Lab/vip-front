@@ -83,7 +83,7 @@
           type="button"
           class="w-1/2 text-center px-5 py-3 text-white font-bold"
           :class="[active === 'beneficiaries' ? 'bg-blue-500 rounded-2xl' : '']"
-          @click="toggle = 'beneficiaries'"
+          @click="toggle = 'beneficiaries';isEdit=false"
         >Beneficiarios
         </button
         >
@@ -92,11 +92,19 @@
     <Transition name="bounce">
       <section v-if="toggle === 'beneficiaries'">
         <div class="bg-white p-5 w-full backdrop-blur backdrop-filter bg-opacity-50 rounded-xl">
-          <p v-for="beneficiary in beneficiaries" :key="beneficiary.id">
-            {{ beneficiary.name }} {{ beneficiary.lastname }}
-          </p>
-          <hr class="my-2 bg-white border-white">
+          <div
+            v-for="(beneficiary, i) in beneficiaries" :key="beneficiary.id"
+            class="flex items-center justify-center flex-col">
+            <span class="text-blue-500 font-semibold text-lg">{{ beneficiary.name }} {{ beneficiary.lastname }}</span>
+            <hr
+              v-if="i < beneficiaries.length - 1"
+              class="my-2 bg-white border-gray-200 opacity-70 border-2 w-full rounded-lg">
+          </div>
         </div>
+        <button type="button"
+                class="rounded-xl bg-blue-400 hover:bg-blue-500 ease-in-out duration-200 px-5 py-3 block my-3 mx-auto text-white font-semibold">
+          Agregar beneficiario
+        </button>
       </section>
     </Transition>
     <Transition name="bounce">
@@ -144,7 +152,7 @@
           </div>
         </div>
         <button
-          v-if="isEdit"
+          v-if="isEdit === false"
           class="block mt-5 mx-auto px-5 py-3 bg-blue-400 hover:bg-blue-500 rounded-xl ease-in-out duration-200 font-semibold text-white"
           type="button"
           @click="isEdit = !isEdit"
@@ -175,7 +183,7 @@ export default {
   data: () => ({
     image: null,
     isChange: false,
-    isEdit: true,
+    isEdit: false,
     toggle: 'profile',
   }),
   computed: {
@@ -246,7 +254,7 @@ export default {
   0% {
     transform: translateY(-50px);
   }
-  25%{
+  25% {
     transform: translateY(0);
   }
   50% {
