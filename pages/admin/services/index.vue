@@ -7,7 +7,7 @@
     </div>
     <span
       v-else
-      class="bg-white bg-opacity-60 backdrop-blur backdrop-filter rounded-xl flex items-center justify-between py-5 px-5"
+      class="bg-white bg-opacity-60 backdrop-blur backdrop-filter rounded-3xl flex items-center justify-between py-5 px-5"
     >
       <span class="text-lg text-blue-500 font-semibold tracking-wide px-5 text-center">Aun no has <br> creado servicios</span>
       <img src="@/assets/shortcuts/service.svg" alt="Servicios"/>

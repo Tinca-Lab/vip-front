@@ -64,7 +64,6 @@ export const actions = {
       const response = await this.$axios.$get(
         `/api/beneficiary/customer/person/${payload}`
       );
-      console.log(response);
       commit("setBeneficiaries", response);
     } catch (error) {
       commit("setError", true);

@@ -5,7 +5,7 @@
       v-else
       class="h-full w-full md:h-screen md:w-screen flex flex-col justify-center items-center background p-5"
     >
-      <div class="min-w-max">
+      <div class="min-w-max min-h-screen">
         <div
           class="bg-white w-full flex flex-col items-center justify-center px-10 py-5 rounded-xl"
         >

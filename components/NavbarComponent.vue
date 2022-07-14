@@ -21,7 +21,7 @@
           Hola, {{ user }}
         </p>
       </div>
-      <div class="relative">
+      <div v-if="!(path ==='settings')" class="relative">
         <button type="button" @click="toggleView">
           <img
             class="rounded-lg shadow-sm"
@@ -84,9 +84,7 @@ export default {
     async onSubmit() {
       this.isLoading = true;
       await this.$auth.logout();
-      this.$router.push("/login").then(r => {
-        this.isLoading = false;
-      });
+      await this.$router.push("/login");
     },
   },
 };

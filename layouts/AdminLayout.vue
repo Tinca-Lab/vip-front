@@ -30,7 +30,7 @@
             <div class="relative">
               <button type="button" @click="toggleView">
                 <img
-                  class="rounded-xl"
+                  class="rounded-3xl"
                   src="@/assets/icons/default_icon.svg"
                   alt="Mi perfil"
                 />

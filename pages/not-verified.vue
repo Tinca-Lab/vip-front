@@ -30,7 +30,7 @@
       <div class="mt-4">
         <nuxt-link
           to="/verify"
-          class="px-3 py-2 text-white bg-indigo-600 rounded-xl"
+          class="px-3 py-2 text-white bg-indigo-600 rounded-3xl"
           >Haz click aqui para verificar
         </nuxt-link>
         <p class="mt-4 text-sm">

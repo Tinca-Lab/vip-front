@@ -70,10 +70,10 @@
     </section>
     <section>
       <div
-        class="bg-blue-200 flex justify-center w-full rounded-2xl p-1 my-5"
+        class="bg-blue-300 flex justify-center w-full rounded-2xl p-1 my-5"
       >
         <button
-          type="button" :class="[active === 'profile' ? 'bg-blue-400 rounded-xl' : '']"
+          type="button" :class="[active === 'profile' ? 'bg-blue-500 rounded-2xl' : '']"
           class="w-1/2 text-center px-5 py-3 text-white font-bold"
           @click="toggle = 'profile'"
         >Mis datos
@@ -82,22 +82,81 @@
         <button
           type="button"
           class="w-1/2 text-center px-5 py-3 text-white font-bold"
-          :class="[active === 'beneficiaries' ? 'bg-blue-400 rounded-xl' : '']"
+          :class="[active === 'beneficiaries' ? 'bg-blue-500 rounded-2xl' : '']"
           @click="toggle = 'beneficiaries'"
         >Beneficiarios
         </button
         >
       </div>
     </section>
-    <section v-if="toggle === 'beneficiaries'">
-      <h2 class="text-2xl font-semibold text-blue-500">Mis beneficiarios</h2>
-      <p v-for="beneficiary in beneficiaries" :key="beneficiary.id">
-        {{ beneficiary.name }} {{ beneficiary.lastname }}
-      </p>
-    </section>
-    <section v-else>
-      <p>Mis datos</p>
-    </section>
+    <Transition name="bounce">
+      <section v-if="toggle === 'beneficiaries'">
+        <div class="bg-white p-5 w-full backdrop-blur backdrop-filter bg-opacity-50 rounded-xl">
+          <p v-for="beneficiary in beneficiaries" :key="beneficiary.id">
+            {{ beneficiary.name }} {{ beneficiary.lastname }}
+          </p>
+          <hr class="my-2 bg-white border-white">
+        </div>
+      </section>
+    </Transition>
+    <Transition name="bounce">
+      <section v-if="toggle === 'profile'">
+        <div class="bg-white p-5 w-full backdrop-blur backdrop-filter bg-opacity-50 rounded-xl">
+          <div class="flex items-center">
+            <label for="name" class="w-1/4 text-left">Nombres:</label>
+            <input
+              id="name"
+              v-model="user.person.name"
+              type="text"
+              class="w-full border-0 bg-transparent font-semibold text-blue-500 outline-none"
+              :disabled="disabled"
+            />
+          </div>
+          <div class="flex items-center">
+            <label for="name" class="w-1/4 text-left">Apellidos:</label>
+            <input
+              id="lastname"
+              v-model="user.person.lastname"
+              type="text"
+              class="w-full border-0 bg-transparent font-semibold text-blue-500 outline-none"
+              :disabled="disabled"
+            />
+          </div>
+          <div class="flex items-center">
+            <label for="email" class="w-1/4 text-left">Correo:</label>
+            <input
+              id="email"
+              v-model="user.email"
+              type="email"
+              class="w-full border-0 bg-transparent font-semibold text-blue-500 outline-none"
+              :disabled="disabled"
+            />
+          </div>
+          <div class="flex items-center">
+            <label for="phone" class="w-1/4 text-left">Telefono:</label>
+            <input
+              id="phone"
+              v-model="user.person.phone"
+              type="number"
+              class="w-full border-0 bg-transparent font-semibold text-blue-500 outline-none"
+              :disabled="disabled"
+            />
+          </div>
+        </div>
+        <button
+          v-if="isEdit"
+          class="block mt-5 mx-auto px-5 py-3 bg-blue-400 hover:bg-blue-500 rounded-xl ease-in-out duration-200 font-semibold text-white"
+          type="button"
+          @click="isEdit = !isEdit"
+        >Editar perfil
+        </button>
+        <button
+          v-else
+          class="block mt-5 mx-auto px-5 py-3 bg-blue-400 hover:bg-blue-500 rounded-xl ease-in-out duration-200 font-semibold text-white"
+          type="button" @click="onSubmit">Guardar Cambios
+        </button>
+      </section>
+    </Transition>
   </div>
 </template>
 
@@ -116,6 +175,7 @@ export default {
   data: () => ({
     image: null,
     isChange: false,
+    isEdit: true,
     toggle: 'profile',
   }),
   computed: {
@@ -135,6 +195,9 @@ export default {
           return "profile";
       }
     },
+    disabled() {
+      return true;
+    }
   },
   beforeCreate() {
     this.$store.dispatch("getBeneficiaries", this.$auth.user.id);
@@ -158,6 +221,10 @@ export default {
     toggleChange() {
       this.isChange = !this.isChange;
     },
+    onSubmit() {
+      console.log('submit');
+      this.isEdit = !this.isEdit;
+    }
   },
 };
 </script>
@@ -169,5 +236,24 @@ export default {
 
 .fade-enter, .fade-leave-to {
   opacity: 0
+}
+
+.bounce-enter-active {
+  animation: bounce-in 0.5s;
+}
+
+@keyframes bounce-in {
+  0% {
+    transform: translateY(-50px);
+  }
+  25%{
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-25px);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
 </style>

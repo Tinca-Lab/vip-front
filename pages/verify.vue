@@ -54,7 +54,7 @@
         >
         <button
           type="button"
-          class="bg-indigo-400 ring-2 ring-indigo-700 px-3 py-2 rounded-xl text-lg text-white my-3"
+          class="bg-indigo-400 ring-2 ring-indigo-700 px-3 py-2 rounded-3xl text-lg text-white my-3"
           @click.prevent="onSubmit"
         >
           Enviar
