@@ -1,6 +1,6 @@
 <template>
   <div>
-    <LoadingComponent v-if="isLoading"/>
+    <LoadingComponent v-if="isLoading" />
     <section
       v-else
       class="h-screen w-screen flex flex-col justify-center items-center background px-5"
@@ -95,7 +95,7 @@
               <label
                 for="default-checkbox"
                 class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-              >Recuerdame</label
+                >Recuerdame</label
               >
             </div>
             <button
@@ -114,26 +114,27 @@
               <nuxt-link
                 class="text-blue-500 underline my-2"
                 to="/forgot-password"
-              >¿Olvidaste tu contraseña?
+                >¿Olvidaste tu contraseña?
               </nuxt-link>
               <nuxt-link class="text-blue-500 underline mb-2" to="/register"
-              >No tengo cuenta
-              </nuxt-link
-              >
+                >No tengo cuenta
+              </nuxt-link>
             </div>
           </form>
         </div>
         <div
           class="bg-blue-200 flex justify-center w-full rounded-2xl p-1 mt-20"
         >
-          <nuxt-link class="w-1/2 text-center px-5 py-3 text-white font-bold" to="/login"
-          >Iniciar Sesion
-          </nuxt-link
-          >
-          <nuxt-link class="w-1/2 text-center px-5 py-3 text-white font-bold" to="/register"
-          >Registrarse
-          </nuxt-link
-          >
+          <nuxt-link
+            class="w-1/2 text-center px-5 py-3 text-white font-bold"
+            to="/login"
+            >Iniciar Sesion
+          </nuxt-link>
+          <nuxt-link
+            class="w-1/2 text-center px-5 py-3 text-white font-bold"
+            to="/register"
+            >Registrarse
+          </nuxt-link>
         </div>
       </div>
     </section>

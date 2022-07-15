@@ -2,15 +2,19 @@
   <div class="px-5 py-32 h-full background">
     <div v-if="services.length > 0">
       <div v-for="(service, i) in services" :key="i">
-        <ServicePopUpComponent :service="service"/>
+        <ServicePopUpComponent :service="service" />
       </div>
     </div>
     <span
       v-else
       class="bg-white bg-opacity-60 backdrop-blur backdrop-filter rounded-3xl flex items-center justify-between py-5 px-5"
     >
-      <span class="text-lg text-blue-500 font-semibold tracking-wide px-5 text-center">Aun no has <br> creado servicios</span>
-      <img src="@/assets/shortcuts/service.svg" alt="Servicios"/>
+      <span
+        class="text-lg text-blue-500 font-semibold tracking-wide px-5 text-center"
+        >Aun no has <br />
+        creado servicios</span
+      >
+      <img src="@/assets/shortcuts/service.svg" alt="Servicios" />
     </span>
     <button
       class="block mx-auto bg-gray-400 rounded-lg px-5 py-3 text-white font-bold my-7"
@@ -113,7 +117,7 @@
               <label
                 class="block mb-2 text-md font-medium text-gray-900 dark:text-gray-300"
                 for="files"
-              >Agregar imagen</label
+                >Agregar imagen</label
               >
               <input
                 id="files"
@@ -189,7 +193,7 @@ export default {
           available: this.available,
         })
         .then(async (response) => {
-          const {data} = response;
+          const { data } = response;
           const formData = new FormData();
           this.image = this.$refs.file.files.item(0);
           formData.append("image", this.image);

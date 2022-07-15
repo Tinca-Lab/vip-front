@@ -1,9 +1,8 @@
 <template>
-  <div class="px-5 py-32 background h-full flex flex-col justify-center items-center">
-    <h1
-      v-if="schedules.length > 0"
-      class="font-bold tracking-wider text-2xl"
-    >
+  <div
+    class="px-5 py-32 background h-full flex flex-col justify-center items-center"
+  >
+    <h1 v-if="schedules.length > 0" class="font-bold tracking-wider text-2xl">
       Mis Citas
     </h1>
     <Transition name="bounce">
@@ -11,9 +10,13 @@
         v-if="schedules.length === 0 && isShowing"
         class="bg-white bg-opacity-60 backdrop-blur backdrop-filter rounded-3xl flex items-center justify-between py-5 px-5"
       >
-      <span class="text-lg text-blue-500 font-semibold tracking-wide px-5 text-center">Aún no tienes <br> citas programadas</span>
-      <img src="@/assets/shortcuts/schedule.svg" alt="Citas medicas"/>
-    </span>
+        <span
+          class="text-lg text-blue-500 font-semibold tracking-wide px-5 text-center"
+          >Aún no tienes <br />
+          citas programadas</span
+        >
+        <img src="@/assets/shortcuts/schedule.svg" alt="Citas medicas" />
+      </span>
     </Transition>
     <div v-if="schedules.length > 0">
       <div
@@ -90,13 +93,8 @@
                   </option>
                 </select>
                 <div class="my-3">
-                  <h2 class="tracking-wide">
-                    Fechas y Horarios Disponibles
-                  </h2>
-                  <select
-                    v-model="date"
-                    class="bg-gray-100 w-full p-3"
-                  >
+                  <h2 class="tracking-wide">Fechas y Horarios Disponibles</h2>
+                  <select v-model="date" class="bg-gray-100 w-full p-3">
                     <option selected disabled>Selecciona una fecha</option>
                     <option
                       v-for="(quote, i) in dates"
@@ -109,10 +107,7 @@
                   </select>
                 </div>
               </div>
-              <button
-                class="bg-indigo-50 px-5 py-3 rounded-lg"
-                type="submit"
-              >
+              <button class="bg-indigo-50 px-5 py-3 rounded-lg" type="submit">
                 Agendar
               </button>
             </form>
@@ -120,7 +115,7 @@
         </div>
       </div>
     </Transition>
-    <LoadingComponent v-if="isLoading"/>
+    <LoadingComponent v-if="isLoading" />
   </div>
 </template>
 
@@ -132,7 +127,7 @@ moment.locale("es");
 export default {
   name: "ScheduleView",
   layout: "SlimLayout",
-  middleware({store, redirect}) {
+  middleware({ store, redirect }) {
     if (store.state.auth.user.role === 1) {
       redirect("/admin/dashboard");
     }
@@ -223,7 +218,7 @@ export default {
   0% {
     transform: translateY(-50px);
   }
-  25%{
+  25% {
     transform: translateY(0);
   }
   50% {
