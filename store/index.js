@@ -4,6 +4,7 @@ export const state = () => ({
   schedules: [],
   available: [],
   beneficiaries: [],
+  subscriptions: [],
 });
 
 export const mutations = {
@@ -22,6 +23,9 @@ export const mutations = {
   setBeneficiaries(state, payload) {
     state.beneficiaries = payload;
   },
+  setSubscriptions(state, payload) {
+    state.subscriptions = payload;
+  }
 };
 
 export const actions = {
@@ -29,7 +33,7 @@ export const actions = {
     state.commit("setError", isError);
   },
 
-  async getServices({ commit }) {
+  async getServices({commit}) {
     try {
       const response = await this.$axios.$get("/api/services/customer");
       commit("setServices", response);
@@ -38,9 +42,9 @@ export const actions = {
     }
   },
 
-  async getSchedules({ commit }) {
+  async getSchedules({commit}) {
     try {
-      const { schedules } = await this.$axios.$get(
+      const {schedules} = await this.$axios.$get(
         `/api/schedule/customer/${this.$auth.user.person.id}`
       );
       commit("setSchedules", schedules);
@@ -49,7 +53,7 @@ export const actions = {
     }
   },
 
-  async getAvailable({ commit }, payload) {
+  async getAvailable({commit}, payload) {
     try {
       const response = await this.$axios.$get(
         `/api/available/customer/${payload}`
@@ -59,9 +63,9 @@ export const actions = {
       commit("setError", true);
     }
   },
-  async getBeneficiaries({ commit }, payload) {
+  async getBeneficiaries({commit}, payload) {
     try {
-      const { beneficiaries } = await this.$axios.$get(
+      const {beneficiaries} = await this.$axios.$get(
         `/api/beneficiary/customer/person/${payload}`
       );
       commit("setBeneficiaries", beneficiaries);
@@ -69,4 +73,15 @@ export const actions = {
       commit("setError", true);
     }
   },
+
+  async getSubscriptions({commit}) {
+    try {
+      const {subscriptions} = await this.$axios.$get(
+        '/api/subscriptions/admin'
+      );
+      commit("setSubscriptions", subscriptions);
+    } catch (error) {
+      commit("setError", true);
+    }
+  }
 };

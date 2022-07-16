@@ -1,7 +1,7 @@
 <template>
   <div class="px-5 py-32 h-full background">
     <Transition name="bounce">
-      <div v-if="isShowing" class="grid grid-rows-3 grid-flow-col gap-4">
+      <div v-if="isShowing" class="grid grid-rows-4 grid-flow-col gap-4">
         <nuxt-link
           to="/admin/schedule"
           class="bg-white bg-opacity-60 backdrop-blur backdrop-filter rounded-3xl flex items-center justify-between py-5 px-5"
@@ -32,6 +32,15 @@
           </span>
           </p>
           <img src="@/assets/shortcuts/settings.svg" alt="Personal"/>
+        </nuxt-link>
+        <nuxt-link
+          to="/admin/subscriptions"
+          class="bg-white bg-opacity-60 backdrop-blur backdrop-filter rounded-3xl flex items-center justify-between py-5 px-5"
+        >
+          <p class="text-lg font-semibold text-blue-500 tracking-wide px-5">
+            Planes
+          </p>
+          <img class="w-20" src="@/assets/shortcuts/subscriptions.png" alt="Planes"/>
         </nuxt-link>
       </div>
     </Transition>
