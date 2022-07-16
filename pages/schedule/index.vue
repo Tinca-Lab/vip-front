@@ -8,7 +8,7 @@
     <Transition name="bounce">
       <span
         v-if="schedules.length === 0 && isShowing"
-        class="bg-white bg-opacity-60 backdrop-blur backdrop-filter rounded-3xl flex items-center justify-between py-5 px-5"
+        class="bg-white w-full bg-opacity-60 backdrop-blur backdrop-filter rounded-3xl flex items-center justify-between py-5 px-5"
       >
         <span
           class="text-lg text-blue-500 font-semibold tracking-wide px-5 text-center"

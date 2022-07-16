@@ -7,7 +7,7 @@
             v-if="user.image !== null"
             :src="user.image.path"
             alt="Imagen de perfil"
-            class="w-36 h-36 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500 object-cover rounded-full"
+            class="w-36 h-36 p-1 rounded-3xl ring-gray-300 dark:ring-gray-500 object-cover"
           />
           <svg
             v-else
@@ -169,10 +169,10 @@
               </div>
               <button
                 type="button"
-                class="rounded-xl bg-blue-400 px-5 py-3 ease-out duration-200 font-semibold text-white"
+                class="rounded-xl w-1/2 block mx-auto bg-blue-400 px-5 py-3 ease-out duration-200 font-semibold text-white"
                 @click="uploadImage"
               >
-                Subir
+                Guardar cambios
               </button>
             </div>
           </Transition>

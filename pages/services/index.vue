@@ -1,20 +1,36 @@
 d
 <template>
   <div class="px-5 py-32 h-full background">
-    <div v-for="(service, i) in services" :key="i" @click="onClick(service)">
-      <ServicePopUpComponent :service="service" />
-    </div>
-    <Transition name="fade">
-      <div v-if="isClick">
-        <div
-          class="bg-white h-screen w-screen fixed top-0 left-0 py-32 px-10 flex items-center"
+
+    <Transition name="bounce">
+      <div v-if="services.length === 0 && isShowing" class="h-full justify-center flex items-center">
+        <span
+          class="bg-white bg-opacity-60 backdrop-blur backdrop-filter rounded-3xl flex items-center justify-between py-5 px-5"
         >
-          <div class="bg-white p-5 shadow rounded-lg block mx-auto w-full">
-            <div class="flex justify-between">
-              <p class="text-2xl tracking-widest font-bold">
-                {{ isService.name }}
-              </p>
-              <button type="button" @click="onClick(null)">
+        <span
+          class="text-lg text-blue-500 font-semibold tracking-wide px-5 text-center"
+        >No hay servicios disponibles</span
+        >
+        <img src="@/assets/shortcuts/service.svg" alt="Citas medicas"/>
+      </span>
+      </div>
+    </Transition>
+    <Transition name="bounce">
+      <div v-if="isShowing">
+        <div v-for="(service, i) in services" :key="i" @click="onClick(service)">
+          <ServicePopUpComponent :service="service"/>
+        </div>
+        <Transition name="fade">
+          <div v-if="isClick">
+            <div
+              class="bg-white h-screen w-screen fixed top-0 left-0 py-32 px-10 flex items-center"
+            >
+              <div class="bg-white p-5 shadow rounded-lg block mx-auto w-full">
+                <div class="flex justify-between">
+                  <p class="text-2xl tracking-widest font-bold">
+                    {{ isService.name }}
+                  </p>
+                  <button type="button" @click="onClick(null)">
                 <span
                   class="hover:text-gray-300 ease-in-out duration-75 transition-all"
                 >
@@ -31,11 +47,13 @@ d
                     />
                   </svg>
                 </span>
-              </button>
+                  </button>
+                </div>
+                <span class="text-lg">{{ isService.description }}</span>
+              </div>
             </div>
-            <span class="text-lg">{{ isService.description }}</span>
           </div>
-        </div>
+        </Transition>
       </div>
     </Transition>
   </div>
@@ -45,7 +63,7 @@ d
 export default {
   name: "ServicesView",
   layout: "SlimLayout",
-  middleware({ store, redirect }) {
+  middleware({store, redirect}) {
     if (store.state.auth.user.role === 1) {
       redirect("/admin/dashboard");
     }
@@ -56,6 +74,7 @@ export default {
   data: () => ({
     isClick: false,
     isService: null,
+    isShowing: false,
   }),
   computed: {
     services() {
@@ -64,6 +83,11 @@ export default {
   },
   beforeCreate() {
     this.$store.dispatch("getServices");
+  },
+  mounted() {
+    setTimeout(() => {
+      this.isShowing = true;
+    }, 200);
   },
   methods: {
     onClick(service) {
@@ -80,11 +104,6 @@ export default {
 </script>
 
 <style scoped>
-.bg-white {
-  background-color: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(10px);
-}
-
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.1s;
@@ -93,5 +112,28 @@ export default {
 .fade-enter,
 .fade-leave-to {
   opacity: 0;
+}
+
+.bounce-enter-active {
+  animation: bounce-in 0.5s;
+}
+
+.bounce-leave-active {
+  animation: bounce-in 0.5s reverse;
+}
+
+@keyframes bounce-in {
+  0% {
+    transform: translateY(-50px);
+  }
+  25% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-25px);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
 </style>

@@ -1,12 +1,12 @@
 <template>
   <div
-    class="bg-indigo-50 shadow-sm rounded-lg my-5 p-5 text-2xl cursor-pointer"
+    class="bg-white bg-opacity-50 backdrop-blur rounded-xl my-5 p-5 text-2xl cursor-pointer"
   >
     {{ service.name }}
     <span
       v-for="(date, i) in dates"
       :key="i"
-      class="block bg-green-200 p-2 my-1 rounded-lg uppercase text-sm"
+      class="block bg-blue-200 hover:bg-blue-400 hover:text-white font-semibold ease-out duration-200 p-2 my-1 rounded-lg uppercase text-sm"
     >
       {{ date }}
     </span>

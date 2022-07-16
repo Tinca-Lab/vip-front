@@ -1,7 +1,7 @@
 <template>
   <div class="px-5 py-32 overflow-y-scroll h-screen background">
     <Transition name="bounce">
-      <div v-if="isShowing" class="grid grid-rows-4 grid-flow-col gap-4">
+      <div v-if="isShowing" class="grid grid-rows-3 grid-flow-col gap-4">
         <nuxt-link
           to="/schedule"
           class="bg-white bg-opacity-60 backdrop-blur backdrop-filter rounded-3xl flex items-center justify-between py-5 px-5"
