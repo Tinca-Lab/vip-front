@@ -36,8 +36,8 @@
                 y2="50"
                 gradientUnits="userSpaceOnUse"
               >
-                <stop stop-color="white" stop-opacity="0.9" />
-                <stop offset="1" stop-color="white" stop-opacity="0.45" />
+                <stop stop-color="white" stop-opacity="0.9"/>
+                <stop offset="1" stop-color="white" stop-opacity="0.45"/>
               </linearGradient>
               <linearGradient
                 id="paint1_linear_73_683"
@@ -47,8 +47,8 @@
                 y2="40"
                 gradientUnits="userSpaceOnUse"
               >
-                <stop stop-color="#55C2FF" />
-                <stop offset="1" stop-color="#479AFF" />
+                <stop stop-color="#55C2FF"/>
+                <stop offset="1" stop-color="#479AFF"/>
               </linearGradient>
             </defs>
           </svg>
@@ -85,7 +85,7 @@
                   >
                     Eliminar foto actual
                   </button>
-                  <hr class="border-gray-200 w-full" />
+                  <hr class="border-gray-200 w-full"/>
                   <button
                     type="button"
                     class="text-center font-semibold text-blue-500 border-0 outline-none text-lg my-2"
@@ -164,7 +164,7 @@
                       SVG, PNG, JPG or GIF (MAX. 800x400px)
                     </p>
                   </div>
-                  <input id="files" ref="file" type="file" class="hidden" />
+                  <input id="files" ref="file" type="file" class="hidden"/>
                 </label>
               </div>
               <button
@@ -181,10 +181,10 @@
           class="flex flex-col items-center justify-center w-full my-3 ease-out duration-200 transition-all"
         >
           <h1 class="text-2xl font-bold text-center">
-            {{ user.person.name }}
+            {{ user.name }}
           </h1>
           <h1 class="font-bold">
-            {{ user.person.lastname }}
+            {{ user.lastname }}
           </h1>
         </section>
         <section class="ease-out duration-200 transition-all">
@@ -216,7 +216,14 @@
         </section>
         <Transition name="bounce">
           <section v-if="toggle === 'beneficiaries'">
+            <span
+              v-if="beneficiaries.length === 0"
+              class="bg-white w-full bg-opacity-60 backdrop-blur backdrop-filter rounded-3xl flex items-center justify-between py-5 px-5">
+              <span class="text-lg text-blue-500 font-semibold tracking-wide px-5 text-center">Aún no tienes beneficiarios</span>
+              <img src="@/assets/shortcuts/schedule.svg" alt="Citas medicas"/>
+            </span>
             <div
+              v-else
               class="bg-white p-5 w-full backdrop-blur backdrop-filter bg-opacity-50 rounded-xl"
             >
               <div
@@ -225,7 +232,7 @@
                 class="flex items-center justify-center flex-col"
               >
                 <span class="text-blue-500 font-semibold text-lg"
-                  >{{ beneficiary.name }} {{ beneficiary.lastname }}</span
+                >{{ beneficiary.name }} {{ beneficiary.lastname }}</span
                 >
                 <hr
                   v-if="i < beneficiaries.length - 1"
@@ -253,7 +260,7 @@
                 <label for="name" class="w-1/4 text-left">Nombres:</label>
                 <input
                   id="name"
-                  v-model="user.person.name"
+                  v-model="user.name"
                   type="text"
                   class="w-full border-0 bg-white disabled:font-semibold disabled:text-blue-500 outline-none disabled:bg-transparent rounded-xl ml-2 transition-all ease-out duration-200"
                   :disabled="disabled"
@@ -266,7 +273,7 @@
                 <label for="name" class="w-1/4 text-left">Apellidos:</label>
                 <input
                   id="lastname"
-                  v-model="user.person.lastname"
+                  v-model="user.lastname"
                   type="text"
                   class="w-full border-0 bg-white disabled:font-semibold disabled:text-blue-500 outline-none disabled:bg-transparent rounded-xl ml-2 transition-all ease-out duration-200"
                   :disabled="disabled"
@@ -292,7 +299,7 @@
                 <label for="phone" class="w-1/4 text-left">Telefono:</label>
                 <input
                   id="phone"
-                  v-model="user.person.phone"
+                  v-model="user.phone"
                   type="number"
                   class="w-full border-0 bg-white disabled:font-semibold disabled:text-blue-500 outline-none disabled:bg-transparent rounded-xl ml-2 transition-all ease-out duration-200"
                   :disabled="disabled"
@@ -319,7 +326,7 @@
         </Transition>
       </div>
     </Transition>
-    <LoadingComponent v-if="isLoading" />
+    <LoadingComponent v-if="isLoading"/>
   </div>
 </template>
 
@@ -327,7 +334,7 @@
 export default {
   name: "SettingsView",
   layout: "SlimLayout",
-  middleware({ store, redirect }) {
+  middleware({store, redirect}) {
     if (store.state.auth.user.role === 1) {
       redirect("/admin/dashboard");
     }

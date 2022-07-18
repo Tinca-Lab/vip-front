@@ -2,7 +2,7 @@
   <div class="px-5 py-32 h-full background">
     <Transition name="bounce">
       <div v-if="isShowing" class="flex flex-col h-full justify-center items-center">
-        <div v-if="services.length > 0">
+        <div v-if="services.length > 0" class="w-full">
           <div v-for="(service, i) in services" :key="i">
             <ServicePopUpComponent :service="service"/>
           </div>
@@ -85,6 +85,20 @@
                     />
                   </div>
                 </div>
+                <div class="flex flex-col justify-center my-2">
+                  <label for="discount">Descuento:</label>
+                  <div class="flex items-center">
+                    <span class="mr-3">$</span>
+                    <input
+                      id="discount"
+                      v-model="discount"
+                      class="bg-gray-100 rounded-lg shadow-sm outline-none px-5 py-3 inline w-full"
+                      type="number"
+                      placeholder="Descuento del servicio"
+                      required
+                    />
+                  </div>
+                </div>
                 <div class="flex flex-col justify-center">
                   <label for="available">Disponible:</label>
                   <div v-for="i in howAvailable" :key="i">
@@ -161,6 +175,7 @@ export default {
     howAvailable: 1,
     name: "",
     description: "",
+    discount: "",
     price: "",
     available: [],
     image: null,
@@ -199,6 +214,7 @@ export default {
         .post("/api/services/admin", {
           name: this.name,
           description: this.description,
+          discount: (Number(this.discount) / 100),
           price: this.price,
           available: this.available,
         })

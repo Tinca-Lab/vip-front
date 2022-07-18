@@ -45,7 +45,7 @@ export const actions = {
   async getSchedules({commit}) {
     try {
       const {schedules} = await this.$axios.$get(
-        `/api/schedule/customer/${this.$auth.user.person.id}`
+        `/api/schedule/customer/${this.$auth.user.id}`
       );
       commit("setSchedules", schedules);
     } catch (error) {

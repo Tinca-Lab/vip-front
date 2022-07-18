@@ -1,6 +1,6 @@
 <template>
   <div
-    class="bg-white bg-opacity-50 backdrop-blur rounded-xl my-5 p-5 text-2xl cursor-pointer"
+    class="bg-white bg-opacity-50 backdrop-blur rounded-xl my-5 p-5 text-2xl cursor-pointer w-full"
   >
     {{ service.name }}
     <span

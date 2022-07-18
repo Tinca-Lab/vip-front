@@ -100,7 +100,7 @@ export default {
       return this.$auth.user.image;
     },
     user() {
-      return this.$auth.user.person.name.split(" ")[0];
+      return this.$auth.user.name.split(" ")[0];
     },
     path() {
       return this.$route.path.split("/")[1];

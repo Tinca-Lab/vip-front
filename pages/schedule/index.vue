@@ -12,10 +12,10 @@
       >
         <span
           class="text-lg text-blue-500 font-semibold tracking-wide px-5 text-center"
-          >Aún no tienes <br />
+        >Aún no tienes <br/>
           citas programadas</span
         >
-        <img src="@/assets/shortcuts/schedule.svg" alt="Citas medicas" />
+        <img src="@/assets/shortcuts/schedule.svg" alt="Citas medicas"/>
       </span>
     </Transition>
     <div v-if="schedules.length > 0">
@@ -115,7 +115,7 @@
         </div>
       </div>
     </Transition>
-    <LoadingComponent v-if="isLoading" />
+    <LoadingComponent v-if="isLoading"/>
   </div>
 </template>
 
@@ -127,7 +127,7 @@ moment.locale("es");
 export default {
   name: "ScheduleView",
   layout: "SlimLayout",
-  middleware({ store, redirect }) {
+  middleware({store, redirect}) {
     if (store.state.auth.user.role === 1) {
       redirect("/admin/dashboard");
     }
@@ -186,7 +186,7 @@ export default {
     async onSubmit() {
       await this.$axios.post("api/schedule/customer", {
         date: this.formatDate(this.date, false),
-        person_id: this.$auth.user.person.id,
+        person_id: this.$auth.user.id,
         service_id: this.idService,
       });
       this.toggleView();
