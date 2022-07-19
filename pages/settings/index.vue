@@ -217,32 +217,39 @@
         <Transition name="bounce">
           <section v-if="toggle === 'beneficiaries'">
             <span
-              v-if="beneficiaries.length === 0"
+              v-if="show"
               class="bg-white w-full bg-opacity-60 backdrop-blur backdrop-filter rounded-3xl flex items-center justify-between py-5 px-5">
               <span class="text-lg text-blue-500 font-semibold tracking-wide px-5 text-center">Aún no tienes beneficiarios</span>
-              <img src="@/assets/shortcuts/schedule.svg" alt="Citas medicas"/>
+              <img class="w-20  " src="@/assets/shortcuts/beneficiary.svg" alt="Beneficiarios"/>
             </span>
-            <div
-              v-else
-              class="bg-white p-5 w-full backdrop-blur backdrop-filter bg-opacity-50 rounded-xl"
-            >
+            <Transition name="bounce">
               <div
-                v-for="(beneficiary, i) in beneficiaries"
-                :key="beneficiary.id"
-                class="flex items-center justify-center flex-col"
+                v-if="beneficiaries.length > 0 && isAdd === false"
+                class="bg-white p-5 w-full backdrop-blur backdrop-filter bg-opacity-50 rounded-xl"
               >
+                <div
+                  v-for="(beneficiary, i) in beneficiaries"
+                  :key="beneficiary.id"
+                  class="flex items-center justify-center flex-col"
+                >
                 <span class="text-blue-500 font-semibold text-lg"
                 >{{ beneficiary.name }} {{ beneficiary.lastname }}</span
                 >
-                <hr
-                  v-if="i < beneficiaries.length - 1"
-                  class="my-2 bg-white border-gray-200 opacity-70 border-2 w-full rounded-lg"
-                />
+                  <hr
+                    v-if="i < beneficiaries.length - 1"
+                    class="my-2 bg-white border-gray-200 opacity-70 border-2 w-full rounded-lg"
+                  />
+                </div>
               </div>
-            </div>
+            </Transition>
+            <Transition name="bounce">
+              <AddBeneficiaryPopUp v-if="isAdd" @cancel="isAdd=!isAdd"/>
+            </Transition>
             <button
+              v-if="isAdd === false"
               type="button"
               class="rounded-xl bg-blue-400 hover:bg-blue-500 ease-in-out duration-200 px-5 py-3 block my-3 mx-auto text-white font-semibold"
+              @click="toggleAdd"
             >
               Agregar beneficiario
             </button>
@@ -257,7 +264,7 @@
                 :class="isEdit ? 'ease-out duration-200 my-2' : ''"
                 class="flex items-center transition-all ease-out duration-200"
               >
-                <label for="name" class="w-1/4 text-left">Nombres:</label>
+                <label for="name" class="w-1/4 text-left font-semibold">Nombres:</label>
                 <input
                   id="name"
                   v-model="user.name"
@@ -270,7 +277,7 @@
                 :class="isEdit ? 'ease-out duration-200 my-2' : ''"
                 class="flex items-center transition-all ease-out duration-200"
               >
-                <label for="name" class="w-1/4 text-left">Apellidos:</label>
+                <label for="name" class="w-1/4 text-left font-semibold">Apellidos:</label>
                 <input
                   id="lastname"
                   v-model="user.lastname"
@@ -283,7 +290,7 @@
                 :class="isEdit ? 'ease-out duration-200 my-2' : ''"
                 class="flex items-center transition-all ease-out duration-200"
               >
-                <label for="email" class="w-1/4 text-left">Correo:</label>
+                <label for="email" class="w-1/4 text-left font-semibold">Correo:</label>
                 <input
                   id="email"
                   v-model="user.email"
@@ -296,7 +303,7 @@
                 :class="isEdit ? 'ease-out duration-200 my-2' : ''"
                 class="flex items-center transition-all ease-out duration-200"
               >
-                <label for="phone" class="w-1/4 text-left">Telefono:</label>
+                <label for="phone" class="w-1/4 text-left font-semibold">Telefono:</label>
                 <input
                   id="phone"
                   v-model="user.phone"
@@ -304,6 +311,15 @@
                   class="w-full border-0 bg-white disabled:font-semibold disabled:text-blue-500 outline-none disabled:bg-transparent rounded-xl ml-2 transition-all ease-out duration-200"
                   :disabled="disabled"
                 />
+              </div>
+              <div
+                :class="isEdit ? 'ease-out duration-200 my-2' : ''"
+                class="flex items-center transition-all ease-out duration-200"
+              >
+                <label for="contract" class="w-1/4 text-left font-semibold">Plan:</label>
+                <p v-if="contract" id="contract" class="font-semibold text-blue-500">
+                  {{ contract.subscription.name || 'No tienes plan' }}
+                </p>
               </div>
             </div>
             <button
@@ -349,9 +365,22 @@ export default {
     isEdit: false,
     isShowing: false,
     isLoading: false,
+    isAdd: false,
     toggle: "profile",
   }),
   computed: {
+    contract() {
+      return this.$store.state.contract;
+    },
+    show() {
+      if (this.beneficiaries.length > 0) {
+        return false;
+      } else if (this.beneficiaries.length === 0 && this.isAdd === true) {
+        return false
+      } else {
+        return true
+      }
+    },
     imageLoad() {
       return this.user.image;
     },
@@ -380,6 +409,7 @@ export default {
   },
   beforeCreate() {
     this.$store.dispatch("getBeneficiaries", this.$auth.user.id);
+    this.$store.dispatch("getContract");
   },
   mounted() {
     setTimeout(() => {
@@ -429,6 +459,9 @@ export default {
     },
     onSubmit() {
       this.isEdit = !this.isEdit;
+    },
+    toggleAdd() {
+      this.isAdd = !this.isAdd;
     },
   },
 };

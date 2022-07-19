@@ -5,6 +5,7 @@ export const state = () => ({
   available: [],
   beneficiaries: [],
   subscriptions: [],
+  contract: {},
 });
 
 export const mutations = {
@@ -25,6 +26,9 @@ export const mutations = {
   },
   setSubscriptions(state, payload) {
     state.subscriptions = payload;
+  },
+  setContract(state, payload) {
+    state.contract = payload;
   }
 };
 
@@ -80,6 +84,17 @@ export const actions = {
         '/api/subscriptions/admin'
       );
       commit("setSubscriptions", subscriptions);
+    } catch (error) {
+      commit("setError", true);
+    }
+  },
+
+  async getContract({commit}) {
+    try {
+      const {contract} = await this.$axios.$get(
+        '/api/contract/customer/' + this.$auth.user.id
+      );
+      commit("setContract", contract);
     } catch (error) {
       commit("setError", true);
     }
