@@ -320,7 +320,7 @@ export default {
       this.isLoading = true;
       try {
         await this.$axios
-          .post("http://localhost:8000/api/auth/register", {
+          .$post("/api/auth/register", {
             name: this.name,
             lastname: this.lastname,
             nit: this.nit,
