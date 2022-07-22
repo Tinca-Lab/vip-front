@@ -87,12 +87,11 @@ export default {
           person_id: this.$auth.user.id
         }).then(() => {
           const {beneficiaries} = this.$axios.get('/api/beneficiary/customer').then(() => {
-            console.log(beneficiaries)
             this.$store.commit('setBeneficiaries', beneficiaries);
           });
         });
       } catch (error) {
-        console.log(error.response.data?.error);
+        this.$emit('error', error.response.data?.error)
       }
       this.$emit('close');
     },

@@ -243,7 +243,7 @@
               </div>
             </Transition>
             <Transition name="bounce">
-              <AddBeneficiaryPopUp v-if="isAdd" @cancel="isAdd=!isAdd"/>
+              <AddBeneficiaryPopUp v-if="isAdd" @cancel="isAdd=!isAdd" @error="showBeneficiaryAlert"/>
             </Transition>
             <button
               v-if="isAdd === false"
@@ -317,8 +317,11 @@
                 class="flex items-center transition-all ease-out duration-200"
               >
                 <label for="contract" class="w-1/4 text-left font-semibold">Plan:</label>
-                <p v-if="contract" id="contract" class="font-semibold text-blue-500">
-                  {{ contract.subscription.name || 'No tienes plan' }}
+                <p v-if="contract !== null" id="contract" class="font-semibold text-blue-500">
+                  {{ contract.subscription.name }}
+                </p>
+                <p v-else>
+                  <nuxt-link class="text-blue-500 font-semibold" to="/purchase">Adquirir uno</nuxt-link>
                 </p>
               </div>
             </div>
@@ -343,6 +346,45 @@
       </div>
     </Transition>
     <LoadingComponent v-if="isLoading"/>
+    <Transition name="fade">
+      <div
+        v-if="beneficiaryAlert !== null && contract === null"
+        class="absolute backdrop-filter backdrop-blur bg-gray-50 bg-opacity-50 top-0 left-0 z-50 flex flex-col items-center justify-center p-5 h-screen w-screen">
+        <div class="bg-[#FFF5DA] border-2 border-yellow-200 rounded-2xl p-5 flex flex-col items-center justify-center">
+          <div class="text-yellow-100 block mx-auto">
+            <svg width="37" height="31" viewBox="0 0 37 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M20.2273 18.8421H18.7727C17.6682 18.8421 16.7727 17.9467 16.7727 16.8421V12.1579C16.7727 11.0533 17.6682 10.1579 18.7727 10.1579H20.2273M20.2273 25.7895H18.5096C17.5503 25.7895 16.7727 25.0119 16.7727 24.0526C16.7727 23.0934 17.5503 22.3158 18.5096 22.3158H20.2273M1.22608 28.0021C0.458404 29.3354 1.42079 31 2.95933 31H34.0407C35.5792 31 36.5416 29.3354 35.7739 28.0021L20.2332 1.01037C19.464 -0.325724 17.536 -0.325722 16.7668 1.01037L1.22608 28.0021Z"
+                fill="url(#paint0_linear_220_796)"/>
+              <defs>
+                <linearGradient
+                  id="paint0_linear_220_796" x1="18.5" y1="-2" x2="18.5" y2="31"
+                  gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#FFDA55"/>
+                  <stop offset="1" stop-color="#FF9447"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+          <p class="text-center my-3 font-semibold text-gray-800">
+            {{ beneficiaryAlert }}
+          </p>
+        </div>
+
+      </div>
+    </Transition>
+    <Transition name="fade">
+      <div
+        v-if="beneficiaryAlert !== null && contract !== null"
+        class="absolute backdrop-filter backdrop-blur bg-gray-50 bg-opacity-50 top-0 left-0 z-50 flex flex-col items-center justify-center p-5 h-screen w-screen">
+        <div
+          class="bg-white backdrop-filter backdrop-blur rounded-2xl py-10 px-5 flex flex-col items-center justify-center">
+          <p class="text-center my-3 font-semibold text-blue-500">
+            {{ beneficiaryAlert }}
+          </p>
+        </div>
+      </div>
+    </Transition>
   </div>
 </template>
 
@@ -367,6 +409,7 @@ export default {
     isLoading: false,
     isAdd: false,
     toggle: "profile",
+    beneficiaryAlert: null,
   }),
   computed: {
     contract() {
@@ -457,12 +500,27 @@ export default {
     toggleEdit() {
       this.isEdit = !this.isEdit;
     },
-    onSubmit() {
+    async onSubmit() {
       this.isEdit = !this.isEdit;
+      await this.$axios.put('/api/')
     },
     toggleAdd() {
-      this.isAdd = !this.isAdd;
+      if (this.contract !== null) {
+        this.isAdd = !this.isAdd;
+      } else {
+        this.beneficiaryAlert = "Tienes que tener un plan para agregar beneneficiarios."
+        setTimeout(() => {
+          this.beneficiaryAlert = null;
+        }, 2000)
+      }
     },
+    showBeneficiaryAlert(error) {
+      this.isAdd = false;
+      this.beneficiaryAlert = error;
+      setTimeout(() => {
+        this.beneficiaryAlert = null;
+      }, 2000)
+    }
   },
 };
 </script>
