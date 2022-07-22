@@ -96,6 +96,7 @@ export const actions = {
       );
       commit("setContract", contract);
     } catch (error) {
+      commit("setContract", null)
       commit("setError", true);
     }
   }
