@@ -1,6 +1,6 @@
 <template>
   <div>
-    <LoadingComponent v-if="isLoading" />
+    <LoadingComponent v-if="isLoading"/>
     <section
       v-else
       class="h-full w-full md:h-screen md:w-screen flex flex-col justify-center items-center background p-5"
@@ -272,7 +272,7 @@
             </button>
             <div class="flex flex-col items-center justify-center">
               <nuxt-link class="text-blue-500 underline mt-2" to="/login"
-                >Ya tengo cuenta
+              >Ya tengo cuenta
               </nuxt-link>
             </div>
           </form>
@@ -283,12 +283,12 @@
           <nuxt-link
             class="w-1/2 text-center px-5 py-3 font-bold text-white"
             to="/login"
-            >Iniciar Sesion
+          >Iniciar Sesion
           </nuxt-link>
           <nuxt-link
             class="w-1/2 text-center px-5 py-3 font-bold text-white"
             to="/register"
-            >Registrarse
+          >Registrarse
           </nuxt-link>
         </div>
       </div>
@@ -320,7 +320,7 @@ export default {
       this.isLoading = true;
       try {
         await this.$axios
-          .post("http://localhost:8000/api/auth/register", {
+          .$post("/api/auth/register", {
             name: this.name,
             lastname: this.lastname,
             nit: this.nit,
