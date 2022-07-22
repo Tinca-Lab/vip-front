@@ -58,8 +58,13 @@ export default {
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:8000: https://github.com/nuxt-community/axios-module/issues/308
     baseURL: "https://api.medyapp.tarjeta-vip.com.co",
+    proxy: true,
     proxyHeaders: false,
     credentials: false,
+  },
+
+  proxy: {
+    '/api/': { target: 'https://api.medyapp.tarjeta-vip.com.co', pathRewrite: {'^/api/': ''}, changeOrigin: true }
   },
 
   auth: {
